@@ -1,0 +1,165 @@
+<%- include("partials/header.ejs") %>
+
+  <% if (locals.num && locals.arrs) { %>
+    <% if (locals.doi){ %>
+      <% for (let i=floor; i>=1; i /=2) {%>
+        <div class="inline-block-container">
+          <% for (let j=i; j <=num; j +=i*2) {%>
+            <% if (doi.includes(j)) {%>
+              <div class="inline-block-element"
+                style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: blue;">
+                <h1>
+                  <%= b[j] %>
+                </h1>
+              </div>
+              <% } else { %>
+                <div class="inline-block-element"
+                  style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: gray;">
+                  <h1>
+                    <%= b[j] %>
+                  </h1>
+                </div>
+                <% } %>
+                  <% } %>
+        </div>
+        <% }%>
+          <% } else if (locals.day) {%>
+            <% for (let i=floor; i>=1; i /=2) {%>
+              <div class="inline-block-container">
+                <% for (let j=i; j <=num; j +=i*2) {%>
+                  <% if (day.includes(j)) {%>
+                    <div class="inline-block-element"
+                      style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: red;">
+                      <h1>
+                        <%= b[j] %>
+                      </h1>
+                    </div>
+                    <% } else { %>
+                      <div class="inline-block-element"
+                        style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: gray;">
+                        <h1>
+                          <%= b[j] %>
+                        </h1>
+                      </div>
+                      <% } %>
+                        <% } %>
+              </div>
+              <% }%>
+                <% }else { %>
+                  <% for (let i=floor; i>=1; i /=2) {%>
+                    <div class="inline-block-container">
+                      <% for (let j=i; j <=num; j +=i*2) {%>
+                        <div class="inline-block-element"
+                          style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: gray;">
+                          <h1>
+                            <%= b[j] %>
+                          </h1>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% }%>
+                      <% } %>
+                        <div class="inline-block-container">
+                          <% for (let i=1; i <=num; i++) { %>
+                            <div class="inline-block-element">
+                              <h1>
+                                <%= arrs[i] %>
+                              </h1>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div class="inline-block-container">
+                          <% if (locals.doi) { %>
+                            <% for (let i=1; i <=num; i++) { %>
+                              <% if (doi.includes(i)) { %>
+                                <div class="inline-block-element" style="background-color: red;">
+                                  <h1>
+                                    <%= i %>
+                                  </h1>
+                                </div>
+                                <% }else { %>
+                                  <div class="inline-block-element" style="color: green;">
+                                    <h1>
+                                      <%= i %>
+                                    </h1>
+                                  </div>
+                                  <% } %>
+                                    <% } %>
+                                      <% } else if (locals.day){ %>
+                                        <% for (let i=1; i <=num; i++) { %>
+                                          <% if (day.includes(i)) { %>
+                                            <div class="inline-block-element" style="background-color: blue;">
+                                              <h1>
+                                                <%= i %>
+                                              </h1>
+                                            </div>
+                                            <% }else { %>
+                                              <div class="inline-block-element" style="color: green;">
+                                                <h1>
+                                                  <%= i %>
+                                                </h1>
+                                              </div>
+                                              <% } %>
+                                                <% } %>
+                                                  <% } else { %>
+                                                    <% for (let i=1; i <=num; i++) { %>
+                                                      <div class="inline-block-element" style="color: green;">
+                                                        <h1>
+                                                          <%= i %>
+                                                        </h1>
+                                                      </div>
+                                                      <% } %>
+                                                        <% } %>
+                        </div>
+                        <% } %>
+                          <% if (locals.day) { %>
+                            <h1>ket qua cua query tu <%= starto %> den <%= endo %> la <%= kq %>
+                            </h1>
+                            <% } %>
+                              <h1>Fenwick tree 🤘</h1>
+                              <form action="/home" method="POST">
+                                <input type="submit" name="home" value="Home">
+                              </form>
+                              <form action="/oke" method="POST">
+                                <input type="submit" name="oke" value="OK">
+                              </form>
+                              <br>
+                              <form action="/submit" method="POST">
+                                <label for="leng">Nhap so luong phan tu: </label>
+                                <input type="text" name="leng">
+                                <label for="phantu">Nhap cac phan tu: </label>
+                                <input type="text" name="phantu">
+                                <input type="submit" name="submit">
+                              </form>
+                              <br>
+                              <form action="/giatri" method="POST">
+                                <label for="tua">Cho cac so tu: </label>
+                                <input type="text" name="tua">
+                                <label for="denb"> den </label>
+                                <input type="text" name="denb">
+                                <input type="submit" name="giaitri">
+                              </form>
+                              <br>
+                              <form action="/randomi" method="POST">
+                                <label for="soluong">Cho so luong cac chu so random: </label>
+                                <input type="text" name="soluong">
+                                <input type="submit" name="ramdomi">
+                              </form>
+                              <br>
+                              <form action="/thaydoi" method="POST">
+                                <label for="pos">Thay đổi giá trị của vị trí: </label>
+                                <input type="text" name="pos">
+                                <label for="value">thanh: </label>
+                                <input type="text" name="value">
+                                <input type="submit" name="thaydoi">
+                              </form>
+                              <br>
+                              <form action="/truyvan" method="POST">
+                                <label for="start">Tong bat dau tu vi tri: </label>
+                                <input type="text" name="start">
+                                <label for="end">den: </label>
+                                <input type="text" name="end">
+                                <input type="submit" name="truyvan">
+                              </form>
+                              <!-- Step 3 Add Footer -->
+                              <%- include("partials/footer.ejs") %>
