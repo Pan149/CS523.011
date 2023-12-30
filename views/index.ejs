@@ -23,6 +23,35 @@
                   <% } %>
         </div>
         <% }%>
+        <% } else if (locals.starto) {%>
+          <% for (let i=floor; i>=1; i /=2) {%>
+            <div class="inline-block-container">
+              <% for (let j=i; j <=num; j +=i*2) {%>
+                <% if (starto.includes(j)) {%>
+                  <div class="inline-block-element"
+                    style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: blue;">
+                    <h1>
+                      <%= b[j] %>
+                    </h1>
+                  </div>
+                  <% } else if (endo.includes(j)) {%>
+                    <div class="inline-block-element"
+                      style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: red;">
+                      <h1>
+                        <%= b[j] %>
+                      </h1>
+                    </div>
+                  <% } else { %>
+                    <div class="inline-block-element"
+                      style="width: <%= 40 * i %>px; margin-left: <%= j == i ? 0 : i*2*20 %>px; background-color: gray;">
+                      <h1>
+                        <%= b[j] %>
+                      </h1>
+                    </div>
+                    <% } %>
+                      <% } %>
+            </div>
+            <% }%>
           <% } else if (locals.day) {%>
             <% for (let i=floor; i>=1; i /=2) {%>
               <div class="inline-block-container">
@@ -85,6 +114,28 @@
                                   </div>
                                   <% } %>
                                     <% } %>
+                                    <% } else if (locals.starto){ %>
+                                      <% for (let i=1; i <=num; i++) { %>
+                                        <% if (starto.includes(i)) { %>
+                                          <div class="inline-block-element" style="background-color: blue;">
+                                            <h1>
+                                              <%= i %>
+                                            </h1>
+                                          </div>
+                                          <% } else if (endo.includes(i)) { %>
+                                            <div class="inline-block-element" style="background-color: red;">
+                                              <h1>
+                                                <%= i %>
+                                              </h1>
+                                            </div>
+                                          <% }else { %>
+                                            <div class="inline-block-element" style="color: green;">
+                                              <h1>
+                                                <%= i %>
+                                              </h1>
+                                            </div>
+                                            <% } %>
+                                              <% } %>
                                       <% } else if (locals.day){ %>
                                         <% for (let i=1; i <=num; i++) { %>
                                           <% if (day.includes(i)) { %>
@@ -112,10 +163,13 @@
                                                         <% } %>
                         </div>
                         <% } %>
-                          <% if (locals.day) { %>
-                            <h1>ket qua cua query tu <%= starto %> den <%= endo %> la <%= kq %>
+                          <% if (locals.starto) { %>
+                            <h1>Tổng từ <%= sodau + 1 %> đến <%= socuoi %> là <%= kq %>
                             </h1>
-                            <% } %>
+                            <% } else if (locals.day) { %>
+                                <h1>Tổng từ 1 đến <%= endo %> là <%= kq %>
+                                </h1>
+                                <% } %>
                               <h1>Fenwick tree 🤘</h1>
                               <form action="/home" method="POST">
                                 <input type="submit" name="home" value="Home">
@@ -154,10 +208,16 @@
                                 <input type="submit" name="thaydoi">
                               </form>
                               <br>
-                              <form action="/truyvan" method="POST">
-                                <label for="start">Tong bat dau tu vi tri: </label>
+                              <form action="/tinhtong" method="POST">
+                                <label for="end">Tính tổng từ vị trí bắt đầu đến </label>
+                                <input type="text" name="end">
+                                <input type="submit" name="truyvan">
+                              </form>
+                              <br>
+                              <form action="/tinhtongdoan" method="POST">
+                                <label for="start">Tính tổng từ </label>
                                 <input type="text" name="start">
-                                <label for="end">den: </label>
+                                <label for="end">đến </label>
                                 <input type="text" name="end">
                                 <input type="submit" name="truyvan">
                               </form>

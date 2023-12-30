@@ -18,6 +18,7 @@ let n;
 var upd = [];
 var que = [];
 
+
 function update(pos, val) {
   upd = [];
   for (; pos <= n; pos += pos & -pos) {
@@ -172,10 +173,8 @@ app.post("/thaydoi", (req, res) => {
   })
 });
 
-app.post("/truyvan", (req, res) => {
-  var start = req.body.start;
+app.post("/tinhtong", (req, res) => {
   var end = req.body.end;
-  start = parseInt(start);
   end = parseInt(end);
   var x = 0;
   var ketqua = query(end);
@@ -189,8 +188,40 @@ app.post("/truyvan", (req, res) => {
     arrs: a,
     b: BIT,
     day: que,
-    starto: start,
     endo: end,
+    kq: ketqua
+  })
+});
+
+app.post("/tinhtongdoan", (req, res) => {
+  var start = req.body.start;
+  var end = req.body.end;
+  start = parseInt(start)-1;
+  end = parseInt(end);
+  var st = [];
+  var en = [];
+  var x = 0;
+  var ketqua = query(end);
+  en = que;
+  var before = query(start);
+  st = que;
+  ketqua -= before;
+  for (let i = 1; i <= n; i *= 2) {
+    x = i;
+  }
+  console.log(en)
+  console.log(st)
+  console.log(start, end)
+  res.render("index.ejs", {
+    num: n,
+    floor: x,
+    arrs: a,
+    b: BIT,
+    day: que,
+    starto: st,
+    endo: en,
+    sodau: start,
+    socuoi: end,
     kq: ketqua
   })
 });
